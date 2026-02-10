@@ -130,15 +130,23 @@ export function NoteEditor({ note, onClose }: NoteEditorProps) {
     }
   }
 
-  // Rendu Markdown simplifié
-  const renderMarkdown = (text: string) => {
+  // Rendu Markdown simplifié avec échappement HTML
+  const escapeHtml = (text: string) => {
     return text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+  }
+
+  const renderMarkdown = (text: string) => {
+    return escapeHtml(text)
       .replace(/^### (.*$)/gim, '<h3 class="text-lg font-semibold mt-4 mb-2">$1</h3>')
       .replace(/^## (.*$)/gim, '<h2 class="text-xl font-semibold mt-4 mb-2">$1</h2>')
       .replace(/^# (.*$)/gim, '<h1 class="text-2xl font-bold mt-4 mb-2">$1</h1>')
-      .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
-      .replace(/\*(.*)\*/gim, '<em>$1</em>')
-      .replace(/`(.*?)`/gim, '<code class="bg-slate-100 px-1 rounded">$1</code>')
+      .replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>')
+      .replace(/\*(.*?)\*/gim, '<em>$1</em>')
+      .replace(/`(.*?)`/gim, '<code class="bg-slate-100 dark:bg-slate-800 px-1 rounded">$1</code>')
       .replace(/\n/gim, '<br />')
   }
 

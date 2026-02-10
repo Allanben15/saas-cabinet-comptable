@@ -62,9 +62,9 @@ export default function NotesPage() {
   }
 
   return (
-    <div className="flex h-[calc(100vh-8rem)] gap-6">
+    <div className="flex flex-col md:flex-row h-[calc(100vh-8rem)] gap-4 md:gap-6">
       {/* Sidebar - Liste des notes */}
-      <div className="w-80 flex-shrink-0 flex flex-col border-r pr-6">
+      <div className="w-full md:w-72 lg:w-80 flex-shrink-0 flex flex-col md:border-r md:pr-6 max-h-[40vh] md:max-h-none overflow-y-auto">
         {/* Header */}
         <div className="mb-4">
           <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">

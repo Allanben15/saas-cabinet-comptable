@@ -69,7 +69,7 @@ export function TaskColumn({ status, tasks, onEditTask }: TaskColumnProps) {
 
   return (
     <div
-      className="flex flex-col min-h-[500px] w-72 flex-shrink-0"
+      className="flex flex-col min-h-[500px] w-64 sm:w-72 flex-shrink-0 snap-start"
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
@@ -91,9 +91,9 @@ export function TaskColumn({ status, tasks, onEditTask }: TaskColumnProps) {
       </div>
 
       {/* Liste des tâches */}
-      <div className="flex-1 space-y-3 p-2 rounded-lg bg-slate-50/50 border border-dashed border-slate-200 transition-colors">
+      <div className="flex-1 space-y-3 p-2 rounded-lg bg-slate-50/50 dark:bg-slate-800/30 border border-dashed border-slate-200 dark:border-slate-700 transition-colors">
         {tasks.length === 0 ? (
-          <div className="flex items-center justify-center h-24 text-sm text-slate-400">
+          <div className="flex items-center justify-center h-24 text-sm text-slate-400 dark:text-slate-500">
             Aucune tâche
           </div>
         ) : (
