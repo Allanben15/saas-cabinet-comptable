@@ -7,7 +7,7 @@
 -- =====================================================
 -- EXTENSIONS
 -- =====================================================
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+-- uuid-ossp déjà installé par Supabase, on utilise gen_random_uuid() natif PG
 
 -- =====================================================
 -- TYPES ÉNUMÉRÉS
@@ -58,7 +58,7 @@ CREATE TABLE public.profiles (
 -- =====================================================
 -- Tâches personnelles et professionnelles
 CREATE TABLE public.tasks (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
 
   -- Contenu
@@ -95,7 +95,7 @@ CREATE TABLE public.tasks (
 -- =====================================================
 -- Notes Wiki collaboratives
 CREATE TABLE public.wiki_notes (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   author_id UUID NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
 
   -- Contenu
@@ -125,7 +125,7 @@ CREATE TABLE public.wiki_notes (
 -- =====================================================
 -- Définition des badges disponibles
 CREATE TABLE public.badges (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   slug TEXT UNIQUE NOT NULL,
   name TEXT NOT NULL,
   description TEXT NOT NULL,
@@ -141,7 +141,7 @@ CREATE TABLE public.badges (
 -- =====================================================
 -- Badges débloqués par utilisateur
 CREATE TABLE public.user_badges (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
   badge_id UUID NOT NULL REFERENCES public.badges(id) ON DELETE CASCADE,
   unlocked_at TIMESTAMPTZ DEFAULT NOW(),
@@ -154,7 +154,7 @@ CREATE TABLE public.user_badges (
 -- =====================================================
 -- Historique des gains d'XP
 CREATE TABLE public.xp_transactions (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
   xp_amount INTEGER NOT NULL,
   source_type xp_source_type NOT NULL,
@@ -168,7 +168,7 @@ CREATE TABLE public.xp_transactions (
 -- =====================================================
 -- Logs d'audit RGPD
 CREATE TABLE public.audit_logs (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID REFERENCES public.profiles(id) ON DELETE SET NULL,
   action_type TEXT NOT NULL,
   table_name TEXT NOT NULL,

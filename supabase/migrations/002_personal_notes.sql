@@ -10,7 +10,7 @@ CREATE TYPE note_format AS ENUM ('markdown', 'richtext', 'list', 'freeform');
 -- TABLE: personal_notes
 -- =====================================================
 CREATE TABLE public.personal_notes (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
 
   -- Contenu

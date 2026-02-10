@@ -1,12 +1,12 @@
 /**
- * Middleware Next.js
+ * Proxy Next.js
  * Gère l'authentification et les redirections
  */
 
 import { type NextRequest } from 'next/server';
 import { updateSession } from './lib/supabase/middleware';
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   return await updateSession(request);
 }
 

@@ -57,7 +57,7 @@ END $$;
 
 -- Table des clients
 CREATE TABLE IF NOT EXISTS public.clients (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   name TEXT NOT NULL,
   siren TEXT UNIQUE,
   siret TEXT,
@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS public.clients (
 
 -- Contacts clients
 CREATE TABLE IF NOT EXISTS public.client_contacts (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   client_id UUID NOT NULL REFERENCES public.clients(id) ON DELETE CASCADE,
   first_name TEXT NOT NULL,
   last_name TEXT NOT NULL,
@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS public.client_contacts (
 
 -- Assignation utilisateurs aux clients
 CREATE TABLE IF NOT EXISTS public.user_clients (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
   client_id UUID NOT NULL REFERENCES public.clients(id) ON DELETE CASCADE,
   role client_role DEFAULT 'COLLABORATOR',

@@ -82,7 +82,7 @@ export default function DashboardPage() {
           Bonjour, <span className="gradient-text">{profile?.full_name?.split(' ')[0] || 'Utilisateur'}</span> !
         </h1>
         <p className="text-muted-foreground mt-1">
-          Voici un aperçu de votre progression aujourd'hui
+          Voici un aperçu de votre progression 693 aujourd'hui
         </p>
       </div>
 
